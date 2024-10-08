@@ -1,0 +1,53 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "filtered_emissions_data.csv"},
+    "width": 400, "height": 400,
+    "mark": "area",
+    "params": [{
+    "name": "countries",
+    "select": {"type": "point", "fields": ["Country"]},
+    "bind": "legend"
+  }],
+    "encoding": {
+      "x": {
+        "timeUnit": "year", "field": "Year",
+        "axis": {"domain": false, "format": "%Y", "tickSize": 0,"title": "Year"}
+      },
+      "y": {
+        "aggregate": "sum", "field": "Emissions (per capita)",
+        "stack": "normalize",
+        "axis": {"title": "Percentage of CO2 Emissions per Capita", "format": "%"}
+      },
+      "color": {
+  "field": "Country",
+  "type": "nominal",
+  "scale": {
+    "domain": ["Brunei", "Indonesia","Malaysia", "Singapore","Thailand","Vietnam"],
+    "range": ["#ffa600", "#ff6e54", "#dd5182", "#955196", "#444e86", "#003f5c"]
+  },
+  "legend": {
+    "title": "Select a Country",
+    "columns": 6,
+    "orient": "top"
+  }},
+  "opacity": {
+      "condition": {"param": "countries", "value": 1},
+      "value": 0.2
+    },
+    "tooltip": [
+        {"field": "Year", "type": "temporal", "title": "Year", "format": "%Y"},
+        {
+            "field": "Country",
+            "type": "nominal"
+          },
+        {"field": "Emissions (per capita)", "type": "quantitative", "title": "Emissions per Capita (tons)", "format": ".2f"}
+    ]
+    },
+    "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "font": "roboto"
+  
+  }
+}

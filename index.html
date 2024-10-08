@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+<!-- CSS file -->
+<link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+
+<title>FIT3179 Data Visualisation 2</title>
+</head>
+<body>
+  <div class="page">
+  <div class="pure-g">
+    <div class="pure-u-1-1">
+      <h1>Driving Sustainability: Environmental Protection in Malaysia</h1>
+    </div>
+  </div>
+  <div class="pure-g">
+      <div class="container-norm">
+          <div id="choropleth"></div>
+          <script type="text/javascript">
+              var vg_1 = "choropleth.vg.json";
+              vegaEmbed("#choropleth", vg_1).then(function(result) {
+                  // Access the Vega view instance
+              }).catch(console.error);
+          </script>
+      </div>
+      <div class="container">
+      <div class="section">
+      <div class="intro-text">
+        <p><strong>Environmental protection </strong>has become a major priority across Malaysia. With its diverse geography, Malaysia is tasked with addressing <strong>unique environmental concerns</strong> while balancing <strong>economic growth</strong>. Over recent years, government bodies have ramped up their <strong>funding</strong> and <strong>initiatives</strong> to address everything from <strong>biodiversity protection</strong> to <strong>industrial pollution management</strong>.</p>
+    </div>
+  </div>
+  <div class="section">
+    <div class="intro-text">
+      <p>These efforts signal a unified desire to promote <strong>sustainability</strong> and <strong>long-term ecological health</strong>, ensuring that Malaysia's <strong>natural resources</strong> are protected for future generations to thrive in a <strong>cleaner environment</strong>.</p>
+  </div>  
+</div>
+</div>
+<div class="pure-g">
+  <div class="pure-u-1-1">
+    <h2>Breakdown of Expenditure on Environmental Protection by State</h2>
+  </div>
+</div>
+
+<div class="container-1">
+  <div class="section-1">
+          <div id="stackedbar"></div>
+          <script type="text/javascript">
+              var vg_1 = "stackedbar.vg.json";
+              vegaEmbed("#stackedbar", vg_1).then(function(result) {
+                  // Access the Vega view instance
+              }).catch(console.error);
+          </script>
+      </div>
+    
+    <div class="section-1">
+      <div class="intro-text">
+        <p><strong>Malaysia's commitment</strong> to funding environmental protection remains strong as efforts are strategically distributed across critical areas like <strong>pollution management</strong> and the <strong>protection of wildlife</strong>. Each state's contributions showcase the collective responsibility in achieving long-term sustainability and the preservation of <strong>natural ecosystems</strong>.</p>
+
+        <p>While progress has been made, the future of our environment relies on continued focus and strategic investment in <strong>ecological preservation</strong> and <strong>sustainability efforts</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<div class="pure-g">
+  <div class="pure-u-1-1">
+    <h2>ASEAN CO2 emissions per Capita</h2>
+  </div>
+</div>
+
+<div class="container-2">
+  <div class="section-3">
+    <div class="intro-text">
+      <p>The <strong>ASEAN region</strong> faces the dual challenge of fostering <strong>economic growth</strong> while minimising its <strong>environmental impact</strong>. Nations in this region are at various stages of development. As the region progresses, understanding the dynamics of <strong>carbon output</strong> will be crucial to shaping a sustainable and equitable future for all.</p>
+
+<p>While strides have been made toward <strong>reducing emissions</strong>, the path forward is complex. The interplay between <strong>development, industrialisation</strong>, and <strong>climate responsibility</strong> continues to shape the narrative of <strong>environmental stewardship</strong> in ASEAN.</p>
+  </div>
+</div>
+  <div class="section-2">
+    <div id="normstackedarea"></div>
+    <script type="text/javascript">
+        var vg_1 = "stackedarea.vg.json";
+        vegaEmbed("#normstackedarea", vg_1).then(function(result) {
+            // Access the Vega view instance
+        }).catch(console.error);
+    </script>
+      </div>
+    
+    
+</div>
+<div class="pure-g">
+  <div class="pure-u-1-1">
+    <h2>Concentration distribution of Key Air Pollutants in Malaysia</h2>
+  </div>
+</div>
+
+<div class="container-norm">
+<div id="stream"></div>
+    <script type="text/javascript">
+        var vg_1 = "streamgraph_brush.vg.json";
+        vegaEmbed("#stream", vg_1).then(function(result) {
+            // Access the Vega view instance
+        }).catch(console.error);
+    </script>
+    </div>
+    <div class="container">
+      <div class="section">
+      <div class="intro-text">
+        <p>The evolving patterns in <strong>air pollution</strong> across Malaysia highlight the ongoing efforts to monitor and mitigate the impact of industrialisation and urban growth. <strong>Key air pollutants</strong>, such as <strong>CO2</strong>, <strong>NO2</strong>, and <strong>SO2</strong>, remain critical indicators of the nation’s environmental health.</p>
+    </div>
+  </div>
+  <div class="section">
+    <div class="intro-text">
+      <p>As policies and technologies advance, the goal remains clear: to reduce these pollutants for a healthier future. There is an importance of <strong>sustained monitoring</strong> and <strong>proactive measures</strong> to ensure the air quality continues to improve, benefiting both the environment and the people who depend on it.</p>
+  </div>  
+</div>
+</div>
+<div class="container-last">
+  <div class="last-text">
+    <p>Visualisation designed by <strong>Muhammad Ibrahim bin Mohd Yusni</strong>. Dated <strong>8 October 2024</strong>.</p>
+</div>
+</div>
+      
+  </div>
+</div>
+</body>
+</html>

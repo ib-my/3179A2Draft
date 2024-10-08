@@ -1,0 +1,180 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "new_expenditure.csv"},
+  "params": [
+    {
+      "name": "State_selection",
+      "value": "Johor",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All States",
+          "Johor",
+          "Kedah",
+          "Kelantan",
+          "Melaka",
+          "Negeri Sembilan",
+          "Pahang",
+          "Perak",
+          "Perlis",
+          "Penang",
+          "Sabah",
+          "Sarawak",
+          "Selangor",
+          "Terengganu",
+          "W.P. Kuala Lumpur",
+          "W.P. Labuan",
+          "W.P. Putrajaya"
+        ],
+        "labels": [
+          "Show all States",
+          "Johor",
+          "Kedah",
+          "Kelantan",
+          "Melaka",
+          "Negeri Sembilan",
+          "Pahang",
+          "Perak",
+          "Perlis",
+          "Penang",
+          "Sabah",
+          "Sarawak",
+          "Selangor",
+          "Terengganu",
+          "W.P. Kuala Lumpur",
+          "W.P. Labuan",
+          "W.P. Putrajaya"
+        ],
+        "name": "State Selection: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "State_selection == null || datum.State == State_selection"
+    },
+    {
+      "calculate": "datum.Value * 1000",
+      "as": "Actual_Value"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "size": 35
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": {
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "aggregate": "sum",
+          "field": "Actual_Value",
+          "type": "quantitative",
+          "title": "Total Value",
+          "axis": {
+            "format": ".2s",
+        "formatType": "number",
+        "labelExpr": "datum.value >= 1e9 ? datum.value / 1e9 + 'B' : datum.value >= 1e6 ? datum.value / 1e6 + 'M' : datum.value"
+          }
+        },
+        "color": {
+          "field": "Category",
+          "type": "nominal",
+          "title": "Category",
+          "scale": {
+            "domain": [
+              
+              "Environmental assessment and charges",
+              "Other",
+              "Pollution management",
+              "Protection of wildlife & habitats",
+              "Waste management"
+              
+            ],
+            "range": ["#dc0ab4", "#0bb4ff", "#4421af", "#f46a9b", "#00bfa0"]
+          },
+          "legend": {
+            "labelLimit": 180,
+            "orient": "top",
+            "columns": 2
+          }
+        },
+        "tooltip": [
+          {"field": "State", "type": "nominal", "title": "State"},
+          {"field": "Year", "type": "ordinal", "title": "Year"},
+          {"field": "Category", "type": "nominal", "title": "Category"},
+          {
+            "field": "Actual_Value",
+            "type": "quantitative",
+            "title": "Value",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "top",
+        "dy": -13
+      },
+      "transform": [
+        {
+          "filter": "datum.Year == 2021"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "Actual_Value",
+              "as": "Total_2021"
+            }
+          ],
+          "groupby": ["Year"]
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal",
+          "axis": {
+    "labelAngle": 0,
+    "labelPadding": 10,
+    "labelOverlap": false
+  }
+        },
+        "y": {
+          "aggregate": "sum",
+          "field": "Total_2021",
+          "type": "quantitative",
+          "stack": "zero"
+        },
+        "text": {
+          "field": "Total_2021",
+          "type": "quantitative",
+          "format": ","
+        }
+      }
+    }
+  ],
+  "height": 300,
+  "width": 300,
+  "config": {
+    "tooltipFormat": {
+      "numberFormat": ".8f"
+    },
+    "numberFormat": "d",
+    "customFormatTypes": true,
+    "view": {
+      "stroke": "transparent"
+    }, "font": "roboto"
+  }
+}

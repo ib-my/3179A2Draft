@@ -1,0 +1,113 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "clean_pollutants.csv"},
+    "vconcat": [
+    {
+    "width": 800, "height": 200,
+    "mark": "area",
+    "params": [{
+    "name": "pollutants",
+    "select": {"type": "point", "fields": ["pollutant"]},
+    "bind": "legend"
+  }],
+    "encoding": {
+      "x": {
+        "timeUnit": "yearmonth", "field": "date","scale": {"domain": {"param": "brush"}},
+        "axis": {"domain": false, "format": "%b %Y", "tickSize": 0,"title": ""}
+      },
+      "y": {
+        "aggregate": "sum", "field": "concentration",
+        "stack": "center",
+        "axis": {"title": "Concentration (ppm)"}
+      },
+      "color": {
+  "field": "pollutant",
+  "type": "nominal",
+  "scale": {
+    "domain": ["CO", "NO2","O3","SO2"],
+    "range": ["#0042ff",
+      "#ff00a2","#ffe944",
+      "#ff7e44"
+      ]
+  },
+  "legend": {
+    "title": "Pollutant",
+    "orient": "right",
+  "direction": "vertical",
+  "symbolSize": 100,
+  "padding": 20
+  }},"opacity": {
+      "condition": {"param": "pollutants", "value": 1},
+      "value": 0.2
+    },
+    "tooltip": [
+        {"field": "date", "type": "temporal", "title": "Year", "format": "%B %Y"},
+        {
+            "field": "pollutant",
+            "type": "nominal"
+          },
+        {"field": "concentration", "type": "quantitative", "title": "Concentration (ppm)", "format": ".2f"}
+    ]
+    }
+},
+{
+    "width": 800, "height": 60,
+    "mark": "area",
+    "params": [
+{"name": "brush", "select": {"type": "interval",
+"encodings": ["x"]}},
+{
+  "name": "pollutants",
+  "select": {"type": "point", "fields": ["pollutant"]},
+  "bind": "legend"
+}
+],
+    "encoding": {
+      "x": {
+        "timeUnit": "yearmonth", "field": "date", "scale": {"domain": [1498867200000, 1638316800000]},
+        "axis": {"tickCount": 5, "domain": false, "format": "%Y", "tickSize": 0, "title": "Year"}
+      },
+      "y": {
+        "aggregate": "sum", "field": "concentration",
+        "stack": "center",
+        "axis": {"tickCount": 3, "grid": false, "title": "Concentration (ppm)"}
+      },
+      "color": {
+  "field": "pollutant",
+  "type": "nominal",
+  "scale": {
+    "domain": ["CO", "NO2","O3","SO2"],
+    "range": ["#0042ff",
+    "#ff00a2","#ffe944",
+    "#ff7e44"
+    ]
+  },
+  "legend": {
+    "title": "Pollutant",
+    "orient": "right",
+  "direction": "vertical",
+  "symbolSize": 100,
+  "padding": 20
+  }},"opacity": {
+      "condition": {"param": "pollutants", "value": 1},
+      "value": 0.2
+    },
+    "tooltip": [
+        {"field": "date", "type": "temporal", "title": "Year", "format": "%B %Y"},
+        {
+            "field": "pollutant",
+            "type": "nominal"
+          },
+        {"field": "concentration", "type": "quantitative", "title": "Concentration (ppm)", "format": ".2f"}
+    ]
+    }
+}
+],
+"config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "font": "roboto"
+  
+  }
+  }

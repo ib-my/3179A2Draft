@@ -1,0 +1,182 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {"text":"Malaysia Total Expenditure on Environmental Protection by State", "fontSize": 23},
+  "width": 1050,
+  "height": 400,
+  "projection": { "type": "mercator"},
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2021,
+      "bind": {
+        "input": "range",
+        "min": 2017,
+        "max": 2021,
+        "step": 1,
+        "name": "Year: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "ne_10m.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_ocean"
+        }
+      },
+      "mark": { "type": "geoshape", "fill": "#BCF2F6" }
+    },
+    {
+      "data": {
+        "url": "ne_10m.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_graticules_5"
+        }
+      },
+      "mark": { "type": "geoshape", "stroke": "gray", "strokeWidth": 0.5 }
+    },
+    {
+      "data": {
+        "url": "ne_10m.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "filter": "isValid(datum.properties.name) && !datum.total"
+        },
+        {
+          "calculate": "'Data is not available in ' + datum.properties.name",
+          "as": "note"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightgray",
+        "stroke": "white",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "tooltip": {
+          "field": "note"
+        }
+      }
+    },
+    {
+      "data": {
+    "url": "merged_data.csv"
+  },
+  "transform": [
+    {
+      "lookup": "state",
+      "from": {
+        "data": {
+          "url": "ne_10m.topojson",
+          "format": {
+            "type": "topojson",
+            "feature": "ne_10m_admin_1_states_provinces"
+          }
+        },
+        "key": "properties.name"
+      },
+        "as": "geo"
+      },
+    {
+      "filter": "datum.year == Year_selection"
+    },
+    {
+      "calculate": "(datum.total * 1000) / datum.population",
+      "as": "Normalized_Expenditure"
+    },
+    {
+      "calculate": "datum.population * 1000",
+      "as": "Actual_Population"
+    },
+    {
+      "calculate": "datum.total * 1000",
+      "as": "Actual_Total"
+    }
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke": "black",
+    "strokeWidth": 0.3
+  },
+  "encoding": {
+    "shape": {
+      "field": "geo",
+      "type": "geojson"
+    },
+    "color": {
+      "field": "Normalized_Expenditure",
+      "type": "quantitative",
+      "title": "Expenditure per '000 Population",
+      "scale": {
+        "type": "threshold",
+        "domain": [50000, 100000, 150000, 200000],
+        "range": ["#ffffcc","#a1dab4","#41b6c4","#2c7fb8","#253494"]
+      },
+      "legend": {
+        "format": ",",
+        "orient": "bottom-left",
+        "direction": "horizontal",
+        "offset": 290,
+        "padding":10,
+        "labelPadding":20
+        
+      }
+    },
+    "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "Actual_Total",
+            "type": "quantitative",
+            "title": "Total Expenditure",
+            "format": ","
+          },
+          {
+            "field": "Actual_Population",
+            "type": "quantitative",
+            "title": "Population",
+            "format": ","
+          },
+          {
+            "field": "Normalized_Expenditure",
+            "type": "quantitative",
+            "title": "Expenditure per 1K Pop",
+            "format": ",.2f"
+          }
+        ]
+  }
+}
+  ],
+  
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "font": "roboto",
+    "legend": {
+      "padding": 5,
+      "cornerRadius": 5,
+      "fillColor": "ghostwhite",  
+      "strokeColor": "lightgrey", 
+      "strokeWidth": 1
+    }
+  
+  }
+}
