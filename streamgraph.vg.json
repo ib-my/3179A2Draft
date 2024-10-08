@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "data": {"url": "clean_pollutants.csv"},
+    "data": {"url": "clean_pollutants_my.csv"},
     "vconcat": [
     {
     "width": 800, "height": 200,
@@ -11,8 +11,7 @@
     "bind": "legend"
   }],
     "encoding": {
-      "x": {
-        "timeUnit": "yearmonth", "field": "date","scale": {"domain": {"param": "brush"}},
+      "x": {"field": "date","type": "temporal","scale": {"domain": {"param": "brush"}},
         "axis": {"domain": false, "format": "%b %Y", "tickSize": 0,"title": ""}
       },
       "y": {
@@ -64,8 +63,16 @@
 ],
     "encoding": {
       "x": {
-        "timeUnit": "yearmonth", "field": "date", "scale": {"domain": [1498867200000, 1638316800000]},
-        "axis": {"tickCount": 5, "domain": false, "format": "%Y", "tickSize": 0, "title": "Year"}
+        "timeUnit":"yearmonthdate",
+ "field": "date",
+  "scale": {"domain": null},
+  "axis": {
+    "tickCount": 5,
+    "domain": false,
+    "format": "%Y",
+    "tickSize": 0,
+    "title": "Year"
+  }
       },
       "y": {
         "aggregate": "sum", "field": "concentration",
